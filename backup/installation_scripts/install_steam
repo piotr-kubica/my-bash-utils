@@ -1,0 +1,3 @@
+sudo dnf update
+sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-steam.repo
+sudo dnf install steam

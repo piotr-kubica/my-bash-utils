@@ -1,0 +1,17 @@
+
+# install drivers
+sudo apt-get update
+sudo apt-get install git
+git clone https://github.com/OpenELEC/iwlwifi-firmware.git
+cd iwlwifi-firmware/firmware
+sudo cp iwlwifi-7265*  /lib/firmware
+
+# resolve conflicts
+# http://forums.fedoraforum.org/showthread.php?p=1769210
+rfkill list
+echo "blacklist acer-wmi" >> /etc/modprobe.d/blacklist.conf 
+chcon --reference=kvm.conf blacklist.conf 
+
+# reboot system
+
+

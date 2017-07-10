@@ -1,0 +1,10 @@
+# place file in ~/.config/autostart/
+
+[Desktop Entry]
+Name=Dual screen
+
+# point to xranr script path
+Exec=/home/pio/projects/screen-setup/yoga-screen-setup
+
+Terminal=true
+Type=Application

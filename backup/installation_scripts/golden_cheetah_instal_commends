@@ -1,0 +1,67 @@
+
+# Golden Cheetah - build from scratch
+
+# required packages
+$ su -
+$ dnf install bison
+$ dnf install flex
+$ dnf install mesa-libGL-devel
+$ dnf install zlib-devel
+$ dnf install openssl-devel
+$ dnf install gstreamer-devel
+$ dnf install gstreamer-plugin-base-devel
+$ dnf install make automake gcc gcc-c++ kernel-devel
+
+# Qt
+# download QT from https://download.qt.io/archive/qt/5.5/5.5.1/
+https://download.qt.io/archive/qt/5.5/5.5.1/qt-opensource-linux-x64-5.5.1.run
+chmod +x qt-opensource-linux-x64-5.5.1.run
+# run installation wizard 
+./qt-opensource-linux-x64-5.5.1.run
+
+# add make and qmake to PATH
+$ cd ~
+$ gedit .bash_profile
+PATH=$PATH:/usr/bin
+PATH=$PATH:$HOME/Qt5.5.1/5.5/gcc_64/bin
+
+# checkout repo
+git clone https://github.com/GoldenCheetah/GoldenCheetah.git
+# add remote repository after fork on github
+#git remote add origin remote repository URL
+# add all new changes
+#git add .
+#git commit -m "first commit"
+
+# switch to stable version 
+git tags -l
+git checkout V3.4
+
+# prepare for build
+$ cd qwt
+$ cp qwtconfig.pri.in qwtconfig.pri
+$ cd ../src
+$ cp gcconfig.pri.in gcconfig.pri
+$ vi gcconfig.pri
+
+# in gcconfig.pri uncomment lines
+CONFIG += debug
+QMAKE_LEX  = flex
+QMAKE_YACC = bison
+LIBZ_LIBS    = -lz
+QMAKE_CXXFLAGS += -O3
+
+$ make clean
+
+# create and execute separate script for copying missing qm files
+touch duplGcTrans
+
+# duplGcTrans content
+#!/bin/bash
+cd ./src/Resources/translations
+for file in *.ts; do
+    lrelease "$file" -qm "`basename "$file" .ts`.qm"
+done
+
+$ qmake -recursive
+$ make

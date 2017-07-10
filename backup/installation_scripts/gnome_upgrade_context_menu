@@ -1,0 +1,2 @@
+sudo dnf install nautilus-open-terminal
+sudo dnf install nautilus-actions
