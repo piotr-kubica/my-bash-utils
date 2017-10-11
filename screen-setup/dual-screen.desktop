@@ -4,7 +4,7 @@
 Name=Dual screen
 
 # point to xranr script path
-Exec=/home/pio/projects/screen-setup/yoga-screen-setup
+Exec=/home/pio/projects/my-bash-utils/screen-setup/yoga-screen-setup
 
 Terminal=true
 Type=Application
