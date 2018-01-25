@@ -1,1 +1,5 @@
+# find out what is the block size
+sudo blockdev --getbsz /dev/sdb
+
+# do the copying
 sudo dd if=/dev/sdc of=/run/media/pio/Transcend/fedora_sandisk64_backup bs=4096 conv=noerror,sync status=progress

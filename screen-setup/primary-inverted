@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+logger "Enabling first screen (if case turned off)"
+$(xrandr -d :0 --auto)
+
+logger "First screen as primary"
+$(xrandr --output eDP1 --primary)
+
+logger "Inverting orientation of screen."
+$(xrandr --output eDP1 --rotate inverted)
+

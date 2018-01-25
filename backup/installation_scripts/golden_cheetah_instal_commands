@@ -51,8 +51,6 @@ QMAKE_YACC = bison
 LIBZ_LIBS    = -lz
 QMAKE_CXXFLAGS += -O3
 
-$ make clean
-
 # create and execute separate script for copying missing qm files
 touch duplGcTrans
 
@@ -63,5 +61,15 @@ for file in *.ts; do
     lrelease "$file" -qm "`basename "$file" .ts`.qm"
 done
 
+# execute in (top level directory GoldenCheetah)
 $ qmake -recursive
 $ make
+
+################
+
+# to clean up execute
+$ make clean
+
+# To update translations execute in GoldenCheetah/src
+$ lupdate src.pro -ts Resources/translations/*.ts
+

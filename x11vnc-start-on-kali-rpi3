@@ -1,0 +1,29 @@
+http://nexsniper.blogspot.com/2017/06/install-x11vnc-on-kali-linux-raspberry.html
+
+Once your PI is configured, update it.
+
+
+     apt-get update
+     apt-get upgrade
+
+After everything is updated, install x11vnc by typing
+
+    apt-get install x11vnc 
+
+After it is installed, set up a password to connect to your PI.
+Type,
+
+    x11vnc -storepasswd
+
+Enter your password and press enter and you're done.
+
+
+To connect through vnc, first you need to start the service.Type the following command to start it.
+
+    x11vnc -ncache 10 -auth guess -nap -forever -loop -repeat -rfbauth /root/.vnc/passwd -rfbport 5900 -noncache
+
+Use a VNC application such as VNC CONNECT and login using the PI's IP Address.
+
+Download the VNC CONNECT 
+
+https://www.realvnc.com/download/vnc/
