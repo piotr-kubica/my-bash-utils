@@ -1,0 +1,322 @@
+\documentclass[8pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{etoolbox}
+\usepackage{fancyvrb}
+\usepackage{array}
+\usepackage[most]{tcolorbox}
+
+\definecolor{bg}{RGB}{240,240,240}
+
+% ---------------------------------------------------------
+
+% reduce font size in Bib
+\apptocmd{\thebibliography}{\fontsize{6}{7}\selectfont}{}{}%
+
+% reduce line spacing in Bib
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{0pt}
+  \setlength{\itemsep}{0pt plus 0.3ex}
+}
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (piku)
+  /Subject (Bash Cheatsheet)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+% ---------------------------------------------------------
+
+\begin{document}
+\lstset{language=Bash}
+\raggedright
+\small
+\begin{multicols}{3}
+
+% multicol parameters
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section{Bash Cheatsheet}
+\subsection{\textbf{awk 'pattern \{action\}' input.txt}}
+\vspace{0.2cm}
+Print 5th column\dots \\
+\texttt{
+awk '\{ print \$5 \}' input.txt
+}
+\\ \vspace{0.2cm}
+
+\dots separated by comma \\
+\texttt{
+awk -F, '\{ print \$5 \}' input.txt
+}
+\\ \vspace{0.2cm}
+
+\dots when 7th column equals \$7.30 \\
+\texttt{
+awk '\$7=="\textbackslash{}\$7.30" \{ print \$5 \}' input.txt
+}
+\\ \vspace{0.2cm}
+
+\dots (regex) when line starts with 'st', ends with 'end' with chars between 'a' to 'z' \\
+\texttt{
+awk '/\textasciicircum{}st[a-z]end\$/ \{print \$5\}' input.txt
+}
+\\ \vspace{0.2cm}
+
+Print sum of 2nd and 3rd column \\
+\texttt{
+awk '{print (\$2 + \$3)}' input.txt
+}
+\\ \vspace{0.2cm}
+
+Print sum of all columns (\texttt{NF} holds column count) \\
+\texttt{
+awk '\{sum=0; for (col=1; col<=NF; col++) sum += \$col; print sum;\}' input.txt
+}
+\\ \vspace{0.2cm}
+
+Print the sum of all rows (\texttt{END} terminates row) \\
+\texttt{
+awk '\{s += \$1\} END \{print s\}' input.txt
+}
+
+\vspace{0.2cm}
+\subsection{\textbf{sort [options] [file\dots]}}
+\vspace{0.2cm}
+Sort by 5th column \\
+\texttt{
+sort -k5 input.txt
+}
+\\ \vspace{0.2cm}
+Sort comma delimited by 5th col (\textit{-n} gives numerical sort) \\
+\texttt{
+sort -t, -nk5 user.csv
+}
+
+
+\vspace{0.2cm}
+\subsection{\textbf{uniq [options] [file\dots]}}
+\textit{Reads standard input comparing \textbf{adjacent lines}, and writes
+  a copy of each unique input line to the standard output. \textbf{TIP: use with} \texttt{sort}} \\
+\vspace{0.2cm}
+Filter out duplicates \\
+\texttt{
+sort input.txt | uniq
+}
+
+\vspace{0.2cm}
+Count times a line occures \\
+\texttt{
+sort input.txt | uniq -c
+}
+
+\vspace{0.2cm}
+Print only duplicated lines \\
+\texttt{
+sort input.txt | uniq -d
+}
+
+\vspace*{\fill}
+\columnbreak
+
+\vspace{0.2cm}
+\subsection{\textbf{sed [options] [file\dots]}}
+\vspace{0.2cm}
+Replace '4.5' with 'abc' \\
+\texttt{
+sed 's/4.5/abc/' input.txt
+}
+\vspace{0.2cm}
+Filter lines containng 'John' \\
+\texttt{
+sed '/John/p' input.txt
+}
+\vspace{0.2cm}
+Filter lines which do not contain 'John' \\
+\texttt{
+sed '/John/d' intput.txt
+}
+Filter lines 1 to 4 \\
+\texttt{
+sed '1-4d' intput.txt
+}
+
+\vspace{0.2cm}
+\subsection{\textbf{xargs [options] [command]}}
+\vspace{0.2cm}
+
+Apply entire input as args \\
+\texttt{
+cat input.txt | xargs
+} \\
+\vspace{0.2cm}
+\textit{input.txt} \begin{tcolorbox}[enhanced jigsaw,colback=bg,boxrule=0pt,arc=0pt]
+one two \\
+three
+\end{tcolorbox}
+output \begin{tcolorbox}[enhanced jigsaw,colback=bg,boxrule=0pt,arc=0pt]
+one two three
+\end{tcolorbox}
+\vspace{0.2cm}
+
+Apply arguments split by whitechars \texttt{-n} \\
+\texttt{
+cat input.txt | xargs -n 1
+} \\
+\vspace{0.2cm}
+\textit{input.txt} \begin{tcolorbox}[enhanced jigsaw,colback=bg,boxrule=0pt,arc=0pt]
+one two \\
+three
+\end{tcolorbox}
+output \begin{tcolorbox}[enhanced jigsaw,colback=bg,boxrule=0pt,arc=0pt]
+one \\ two \\ three
+\end{tcolorbox}
+
+Apply arguments split by line \texttt{-L} \\
+\texttt{
+cat input.txt | xargs -L 1
+} \\
+\vspace{0.2cm}
+\textit{input.txt} \begin{tcolorbox}[enhanced jigsaw,colback=bg,boxrule=0pt,arc=0pt]
+one two \\ three
+\end{tcolorbox}
+output \begin{tcolorbox}[enhanced jigsaw,colback=bg,boxrule=0pt,arc=0pt]
+one two \\ three
+\end{tcolorbox}
+
+\vspace*{\fill}
+\columnbreak
+
+
+\vspace{0.2cm}
+\subsection{\textbf{find [-H] [-L] [-P] [path\dots] [expression]}}
+\vspace{0.2cm}
+Find matching *.java files in current directory \\
+\texttt{
+find . -name "*.java"
+}
+
+\vspace{0.2cm}
+Find matching *.java files in current directory \\
+\texttt{
+find . -name "*.java"
+}
+
+\vspace{0.2cm}
+Find case-insensitive matching *.java files \\
+\texttt{
+find . -iname "*.java"
+}
+
+
+\vspace{0.2cm}
+Find file matching Regex pattern files (\texttt{-iregex} case-insensitive) \\
+\texttt{
+find . -regex ".*jav."
+}
+-regex pattern
+
+\vspace{0.2cm}
+Find files modified 1 day ago (\texttt{-1}/\texttt{+1} for days less/more) \\
+\texttt{
+find . -mtime 1
+}
+
+\vspace{0.2cm}
+Find files with permission 644 \\
+\texttt{
+find . -perm 644
+}
+
+\vspace{0.2cm}
+Carry out a \textit{command} on each file that find matches \\
+\texttt{
+find . -regex '*.java' -exec \textit{wc -c} \{\} \textbackslash{};
+}
+
+\vspace{0.2cm}
+\subsection{\textbf{grep [OPTIONS] PATTERN [FILE...]}}
+\vspace{0.2cm}
+Search for 'text' in input.txt file (regex) \\
+\texttt{grep "text" input.txt} \\
+\texttt{grep "t.*[x|X]t" input.txt}
+
+\vspace{0.2cm}
+Search for case-insensitive 'text' in matching files in*t.txt file \\
+\texttt{
+grep -i "text" in*t.txt
+}
+
+\vspace{0.2cm}
+Display 3 lines before/after/around the match using \texttt{-B}/\texttt{-A}/\texttt{-C} \\
+\texttt{
+grep \textbf{-A} 3 -i "example" input.txt
+}
+
+\rule{0.3\linewidth}{0.25pt}
+\footnotesize
+
+\begin{thebibliography}{99}
+
+\bibitem{MAN} https://linux.die.net/man/
+\bibitem{TGS} https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples
+\bibitem{LW1} https://www.lifewire.com/write-awk-commands-and-scripts-2200573
+\bibitem{LW2} https://www.lifewire.com/example-uses-of-sed-2201058
+\bibitem{MBO} http://www.mblog.boo.pl/artykul-162-xargs-przesylanie-starnardowego-wejscia-jako-parametry-do-programu.html
+
+\end{thebibliography}
+
+\end{multicols}
+\end{document}
