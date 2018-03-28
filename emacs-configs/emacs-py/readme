@@ -1,0 +1,29 @@
+# .bashrc
+alias emacs-py='source ~/pyenv/bin/activate;emacs -q -l ~/.emacs.d-py/init.el &'
+
+# ll -al
+drwxrwxr-x.    8 pio  pio       4096 03-28 18:45 .emacs.d-py
+
+# emacs installed packages
+  dired+             20170818.1411 installed             Extensions to Dired.
+  elpy               20171015.548  installed             Emacs Python Development Environment
+  magit              20170913.1424 installed             A Git porcelain inside Emacs
+  shell-here         20150728.1004 installed             Open a shell relative to the working directory
+  smex               20151212.1409 installed             M-x interface with Ido-style fuzzy matching.
+  async              20170823.2116 dependency            Asynchronous processing in Emacs
+  auctex             12.1.0        dependency            Integrated environment for *TeX*
+  company            20170828.414  dependency            Modular text completion framework
+  dash               20170810.137  dependency            A modern list library for Emacs
+  elm-mode           20170903.221  dependency            Major mode for Elm
+  f                  20170404.1039 dependency            Modern API for working with files and directories
+  find-file-in-pr... 20170906.2011 dependency            Find file/directory and review Diff/Patch/Commit efficiently everywhere
+  git-commit         20170914.258  dependency            Edit Git commit messages
+  highlight-inden... 20170502.43   dependency            Minor modes for highlighting indentation
+  ivy                20170911.1034 dependency            Incremental Vertical completYon
+  magit-popup        20170913.343  dependency            Define prefix-infix-suffix command combos
+  multiple-cursors   20170908.1452 dependency            Multiple cursors for Emacs.
+  paredit            20171126.1805 dependency            minor mode for editing parentheses
+  pyvenv             20170826.812  dependency            Python virtual environment interface
+  s                  20170906.1304 dependency            The long lost Emacs string manipulation library.
+  with-editor        20170817.1240 dependency            Use the Emacsclient as $EDITOR
+  yasnippet          20170828.1908 dependency            Yet another snippet extension for Emacs.
