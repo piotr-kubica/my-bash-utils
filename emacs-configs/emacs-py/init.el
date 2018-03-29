@@ -121,3 +121,8 @@
 ;; use ipython in shell
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
+
+(defun elpy-shell()
+  (interactive)
+  (previous-multiframe-window)
+  (elpy-shell-switch-to-shell))
