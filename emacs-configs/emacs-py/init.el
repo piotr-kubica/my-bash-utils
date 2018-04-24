@@ -106,6 +106,9 @@
 ;; Enable transient mark mode
 (transient-mark-mode 1)
 
+;; overwrite selected text while typing
+(delete-selection-mode 1)
+
 ;; auto complete
 ;; (ac-config-default)
 
