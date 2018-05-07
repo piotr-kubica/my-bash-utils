@@ -27,3 +27,4 @@ drwxrwxr-x.    8 pio  pio       4096 03-28 18:45 .emacs.d-py
   s                  20170906.1304 dependency            The long lost Emacs string manipulation library.
   with-editor        20170817.1240 dependency            Use the Emacsclient as $EDITOR
   yasnippet          20170828.1908 dependency            Yet another snippet extension for Emacs.
+  smartparens        20180430.220  installed             Automatic insertion, wrapping and paredit-like navigation with user defined pairs.
