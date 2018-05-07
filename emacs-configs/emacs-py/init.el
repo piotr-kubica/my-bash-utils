@@ -57,7 +57,6 @@
 (global-set-key (kbd "C-c #") 'mc/insert-numbers)
 (global-set-key (kbd "C-c s") 'mc/sort-regions)
 (global-set-key (kbd "C-c r") 'mc/reverse-regions)
-;; multiple cursors alternative mapping
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
