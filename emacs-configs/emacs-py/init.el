@@ -58,10 +58,6 @@
 (global-set-key (kbd "C-c s") 'mc/sort-regions)
 (global-set-key (kbd "C-c r") 'mc/reverse-regions)
 ;; multiple cursors alternative mapping
-;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
