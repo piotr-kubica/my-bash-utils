@@ -128,3 +128,6 @@
 
 ;; y for yes, n for no
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; show parens mode
+(show-paren-mode 1)
