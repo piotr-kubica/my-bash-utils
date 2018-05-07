@@ -129,3 +129,6 @@
   (interactive)
   (previous-multiframe-window)
   (elpy-shell-switch-to-shell))
+
+;; y for yes, n for no
+(defalias 'yes-or-no-p 'y-or-n-p)
