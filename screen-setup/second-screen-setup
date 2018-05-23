@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-is_hdmi1_connected=$(xrandr | grep -e 'HDMI1 connected' | wc -l)
+is_hdmi1_connected=$(xrandr | grep -e 'HDMI-1 connected' | wc -l)
 
 if [ "$is_hdmi1_connected" == "1" ]; then
-    logger "$0 Enabling first screen (if case turned off)"
-    $(xrandr --output eDP1 --off)
+    logger "$0 Enabling HDMI-1 screen."
+    $(xrandr --output HDMI-1 --auto)
 
-    logger "$0 Enabling HDMI1 screen."
-    $(xrandr --output HDMI1 --auto)
-
-    logger "$0 HDMI1 is connected. Setting HDMI1 to primary screen."
-    $(xrandr --output HDMI1 --primary)
+    logger "$0 HDMI-1 is connected. Setting HDMI-1 to primary screen."
+    $(xrandr --output HDMI-1 --primary)
+    
+    logger "$0 Disabling first screen (if case turned off)"
+    $(xrandr --output eDP-1 --off)
 fi
