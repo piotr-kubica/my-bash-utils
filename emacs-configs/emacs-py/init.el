@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -6,15 +5,11 @@
 (package-initialize)
 
 (require 'package)
-(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
 
 ;; Color Themes
-;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/
-;; for a great explanation of emacs color themes.
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html
-;; for a more technical explanation.
+;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/  for a explanation of color themes.
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html  for a more technical explanation.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
 (load-theme 'tomorrow-night-bright t)
@@ -63,7 +58,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (shell-here dired+ smex magit elpy))))
+ '(package-selected-packages (quote (projectile shell-here dired+ smex magit elpy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -108,10 +103,10 @@
 ;; (ac-config-default)
 
 ;; save emacs session
+(require 'desktop)
+;; save desktop file to fixed directory
+(setq desktop-path (list "~/.emacs.d"))
 (desktop-save-mode 1)
-
-;; restore desktop
-(desktop-read)
 
 ;; python elpy mode
 (elpy-enable)
@@ -130,3 +125,6 @@
 
 ;; show parens mode
 (show-paren-mode 1)
+
+;; projectile
+(projectile-global-mode 1)
