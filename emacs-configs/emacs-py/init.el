@@ -135,3 +135,7 @@
 
 ;; projectile
 (projectile-global-mode 1)
+
+;; open notes.org
+(find-file "~/Dropbox/org/notes.org")
+
