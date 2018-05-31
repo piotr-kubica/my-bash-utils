@@ -14,6 +14,13 @@
 (add-to-list 'load-path "~/.emacs.d/themes")
 (load-theme 'tomorrow-night-bright t)
 
+;; org mode
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+;; goto by percent
 (defun goto-percent (percent)
   "Goto PERCENT of buffer."
   (interactive "nGoto percent: ")
