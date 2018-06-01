@@ -24,7 +24,7 @@
   '((sequence "TODO(t)" "IN PROGRESS(i)" "|" "DONE(d)" "DISMISSED(s)")))
 
 (setq org-agenda-files (list "~/Dropbox/org/notes.org"
-			     "~/org/work.org"))
+			     "~/Dropbox/org/work.org"))
 
 ;; open notes.org
 (find-file "~/Dropbox/org/notes.org")
