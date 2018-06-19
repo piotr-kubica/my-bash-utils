@@ -20,12 +20,16 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+;; setup keywords and colors
 (setq org-todo-keywords
-  '((sequence "TODO(t)" "IN PROGRESS(i)" "|" "DONE(d)" "DISMISSED(s)")))
+      '((sequence "TODO(t)" "IN PROGRESS(i)" "|" "DONE(d)" "DISMISSED(s)")))
+(setq org-todo-keyword-faces
+      '(("IN PROGRESS" . (:foreground "red" :weight bold))))
+
 
 (setq org-agenda-files (list "~/Dropbox/org/notes.org"
 			     "~/Dropbox/org/work.org"))
-
+      
 ;; open notes.org
 (find-file "~/Dropbox/org/notes.org")
 
@@ -74,7 +78,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (projectile shell-here dired+ smex magit elpy))))
+ '(org-agenda-files (quote ("~/Dropbox/org/notes.org")))
+ '(package-selected-packages
+   (quote
+    (klere-theme projectile shell-here dired+ smex magit elpy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -144,4 +151,3 @@
 
 ;; projectile
 (projectile-global-mode 1)
-
