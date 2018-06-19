@@ -12,7 +12,26 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html  for a more technical explanation.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
-(load-theme 'tomorrow-night-bright t)
+
+;; (load-theme 'tomorrow-night-bright t)
+;; (load-theme 'klere t)
+
+(setq my-color-themes
+      (list
+       'tomorrow-night-bright
+       'klere))
+
+(setq theme-current my-color-themes)
+
+(defun load-next-theme ()            
+  (interactive)
+  (setq theme-current (cdr theme-current))
+  (if (null theme-current)
+      (setq theme-current my-color-themes))
+  (load-theme (car theme-current))
+  (message "%S" (car theme-current)))
+    
+(global-set-key [f4] 'load-next-theme)
 
 ;; org mode
 (require 'org)
@@ -78,6 +97,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "c7cc498270cd943b0e82e184e91adc671f5cde467940af36da48688fb1763f0c" default)))
  '(org-agenda-files (quote ("~/Dropbox/org/notes.org")))
  '(package-selected-packages
    (quote
