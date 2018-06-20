@@ -13,9 +13,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
 
-;; (load-theme 'tomorrow-night-bright t)
-;; (load-theme 'klere t)
-
 (setq my-color-themes
       (list
        'tomorrow-night-bright
@@ -32,6 +29,9 @@
   (message "%S" (car theme-current)))
     
 (global-set-key [f4] 'load-next-theme)
+
+;; setup theme at startup
+(load-theme 'tomorrow-night-bright t)
 
 ;; org mode
 (require 'org)
