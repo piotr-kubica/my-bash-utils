@@ -1,0 +1,6 @@
+tar --exclude-vcs \
+    --exclude-backups \
+    --exclude='./.cache' \
+    --exclude='./.steam' \
+    --exclude='./node_modules' \
+    -cf - .  | (pv -p --timer --rate --bytes > /run/media/pio/one-t/systemy-konta-urzadzenia-backup/home_backup_fc28.tar)
