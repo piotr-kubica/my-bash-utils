@@ -4,7 +4,7 @@ is_hdmi1_connected=$(xrandr | grep -e 'HDMI-1 connected' | wc -l)
 
 if [ "$is_hdmi1_connected" == "1" ]; then
     logger "$0 Enabling HDMI1 screen."
-    $(xrandr --output HDMI-1 --auto)
+    $(xrandr --output HDMI-1 --mode 1920x1080)
     logger "$0 HDMI1 is connected. Setting HDMI1 to primary screen."
 
 #    logger "$0 Enabling HDMI-1 screen."
